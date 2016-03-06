@@ -18,11 +18,13 @@ body {
 }
 
 .score {
+    margin-left:auto;
+    margin-right:auto;
     color: rgba(255, 255, 255, 0.5);
     font-size: 20px;
     font-weight: bold;
     padding-top: 100px;
-    text-align: center;
+    text-align: left;
 }
 
 .stage {
@@ -39,8 +41,16 @@ body {
     background-color: rgba(0, 0, 0, 0.15);;
 }
 
+.user{
+    color: #13629E;
+}
+
+.head{
+    color: #5CB85C;
+}
+
 .snake-on-cell {
-    background-color: #e30b5c;
+    background-color: #13629E;
 }
 
 .point {
@@ -74,3 +84,67 @@ body {
 .play h1 {
     font-size: 100px;
 }
+
+.navbar {
+  margin-bottom: 10px;
+}
+.navbar-brand {
+  float: none;
+}
+.navbar-nav .nav-item {
+  float: none;
+}
+.navbar-divider,
+.navbar-nav .nav-item+.nav-item,
+.navbar-nav .nav-link + .nav-link {
+  margin-left: 0;
+}
+@media (min-width: 34em) {
+  .navbar-brand {
+    float: left;
+  }
+  .navbar-nav .nav-item {
+    float: left;
+  }
+  .navbar-divider,
+  .navbar-nav .nav-item+.nav-item,
+  .navbar-nav .nav-link + .nav-link {
+    margin-left: 1rem;
+  }
+}
+
+@-moz-keyframes three-quarters-loader {
+    0% {
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes three-quarters-loader {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes three-quarters-loader {
+    0% {
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+

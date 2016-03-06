@@ -4,11 +4,11 @@
             [ring.util.http-response :as response]
             [clojure.java.io :as io]))
 
-(defn home-page []
-  (layout/render "home.html"))
+(defn snake []
+  (layout/render "snake.html"))
 
 
 (defroutes home-routes
-  (GET "/" [] (home-page))
-  (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp))))
+           (GET "/" [] (snake))
+           (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp))))
 

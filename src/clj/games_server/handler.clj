@@ -2,14 +2,14 @@
   (:require [compojure.core :refer [defroutes routes wrap-routes]]
             [games-server.layout :refer [error-page]]
             [games-server.routes.home :refer [home-routes]]
-            [games-server.routes.services :refer [service-routes]]
             [games-server.middleware :as middleware]
             [clojure.tools.logging :as log]
             [compojure.route :as route]
             [config.core :refer [env]]
             [games-server.config :refer [defaults]]
             [mount.core :as mount]
-            [luminus.logger :as logger]))
+            [luminus.logger :as logger]
+            [games-server.routes.ws :refer [websocket-routes]]))
 
 (defn init
   "init will be called once when
@@ -33,7 +33,7 @@
 
 (def app-routes
   (routes
-    #'service-routes
+    #'websocket-routes
     (wrap-routes #'home-routes middleware/wrap-csrf)
     (route/not-found
       (:body

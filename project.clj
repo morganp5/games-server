@@ -15,13 +15,15 @@
                  [org.webjars.bower/tether "1.1.1"]
                  [org.webjars/jquery "2.2.0"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [com.taoensso/tower "3.0.2"]
                  [compojure "1.4.0"]
                  [ring-webjars "0.1.1"]
                  [ring/ring-defaults "0.1.5"]
                  [ring "1.4.0" :exclusions [ring/ring-jetty-adapter]]
                  [mount "0.1.9"]
                  [luminus-nrepl "0.1.2"]
+                 [com.taoensso/timbre "4.2.1"]
+                 [com.taoensso/sente "1.8.0-beta1"]
+                 [com.taoensso/tower "3.0.2"]
                  [org.clojure/clojurescript "1.7.228" :scope "provided"]
                  [reagent-forms "0.5.20"]
                  [reagent "0.6.0-alpha"]
@@ -33,7 +35,8 @@
                  [metosin/compojure-api "1.0.0"]
                  [org.webjars/webjars-locator-jboss-vfs "0.1.0"]
                  [luminus-immutant "0.1.1"]
-                 [luminus-log4j "0.1.2"]]
+                 [luminus-log4j "0.1.2"]
+                 [org.clojars.frozenlock/reagent-modals "0.2.3"]]
 
   :min-lein-version "2.0.0"
 

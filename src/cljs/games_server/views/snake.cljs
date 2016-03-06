@@ -1,8 +1,11 @@
-(ns games-server.view
+(ns games-server.snake
   (:require-macros [reagent.ratom :refer [reaction]])
   (:require [reagent.core :as reagent :refer [atom]]
             [re-frame.core :refer [subscribe dispatch]]
             [re-frame.core :refer [dispatch dispatch-sync]]
+            [ajax.core :refer [GET]]
+            [games-server.ws :as ws]
+            [games-server.modal :as modal]
             [games-server.utils :as utils]))
 
 (defn render-board
@@ -38,17 +41,46 @@
          [:div.play {:on-click #(dispatch [:initialize])}
           [:h1 "↺" ]]]))))
 
+(defn send-points
+  []
+  (let [points (subscribe [:all-players-points])]
+    (ws/send-players-update! [:snake/update-players @points] 8000)))
+
+(defn table-row
+  [username [user points]]
+  ^{:key (str user)}
+    [(if (= username (str (name user))) :tr.user :tr)
+     [:td.col-xs-9 (name user)]
+     [:td.col-xs-3 (str points)]])
+
 (defn score
   "Renders player's score"
   []
-  (let [points (subscribe [:points])]
+  (let [player-points (subscribe [:all-players-points])
+        username (subscribe  [:username])]
     (fn []
-      [:div.score (str "Score: " @points)])))
+      [:table.score
+       [:tbody
+        [:tr
+         [:th.col-xs-9.head "Username"]
+         [:th.col-xs-3.head "Points"]]
+        (map (partial table-row @username) (take 5 (utils/sort-by-score @player-points)))]])))
+
+(defn ws-response-handler
+  []
+  (fn [{[_ player-points] :?data}]
+    (dispatch [:update-player-points player-points])))
+
+(defonce snake-moving
+         (js/setInterval #(dispatch [:next-state]) 125))
 
 (defn game
   "Main rendering function"
   []
-  [:div
-   [game-over]
-   [score]
-   [render-board]])
+    (ws/start-router! (ws-response-handler))
+    (send-points)
+    [:div
+     [modal/modal]
+     [game-over]
+     [score]
+     [render-board]])
